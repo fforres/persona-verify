@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-interface ClientOptions {
+export interface ClientOptions {
   blueprintId: string;
   environment?: string;
 
