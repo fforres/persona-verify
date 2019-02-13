@@ -1,0 +1,10 @@
+# Ignore locally installed Node modules
+node_modules/
+
+# Ignore built files
+dist/
+
+# Ignore Webpack files
+yarn-debug.log*
+yarn-error.log*
+

@@ -1,0 +1,20 @@
+{
+  "name": "persona-verify",
+  "version": "1.0.0",
+  "description": "The official web client library for the Persona API.",
+  "main": "index.js",
+  "repository": "https://github.com/persona-id/persona-verify.git",
+  "author": "Charles Yeh <charles@withpersona.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.3.3",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  }
+}
