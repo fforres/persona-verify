@@ -14,10 +14,11 @@
   <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
 
   <!-- Main -->
-  <script type="text/javascript" src="dist/index.js"></script>
+  <script type="text/javascript" src="https://cdn.withpersona.com/assets/v2/persona.js"></script>
   <script>
   const client = new Persona.Client({
     blueprintId: 'blu_biqYXr3aNfHuLeXUdJUNFNET',
+    environment: 'development',
     onLoad: () => client.open(),
     onStart: (token) => console.log(token),
     onSuccess: () => {},

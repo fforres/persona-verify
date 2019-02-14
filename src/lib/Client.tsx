@@ -2,8 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Application from 'components/Application';
 
-const PERSONA_BASE_URL = 'http://localhost:3000';
-
 export interface ClientOptions {
   blueprintId: string;
   environment?: string;
@@ -17,17 +15,31 @@ export interface ClientOptions {
 export default class Client {
   private clientOptions: ClientOptions;
   private container: HTMLDivElement;
+  private baseUrl: string;
 
   private isLoading: boolean = true;
   private isOpen: boolean = false;
 
   constructor(options: ClientOptions) {
     this.clientOptions = options;
+    switch(options.environment) {
+      case 'development':
+        this.baseUrl = 'http://localhost:3000';
+        break;
+
+      case 'sandbox':
+        this.baseUrl = 'https://sandbox.withpersona.com';
+        break;
+
+      default:
+        this.baseUrl = 'https://withpersona.com';
+        break;
+    }
+
+    window.addEventListener("message", this.handleMessage);
 
     this.container = document.createElement('div');
     document.children[0].append(this.container);
-
-    window.addEventListener("message", this.handleMessage);
 
     this.render();
   }
@@ -38,7 +50,7 @@ export default class Client {
         blueprintId={this.clientOptions.blueprintId}
         isLoading={this.isLoading}
         isOpen={this.isOpen}
-        personaBaseUrl={PERSONA_BASE_URL}
+        personaBaseUrl={this.baseUrl}
       />,
       this.container,
     );
@@ -65,7 +77,7 @@ export default class Client {
   }
 
   handleMessage = (event) => {
-    if (event.origin !== PERSONA_BASE_URL) {
+    if (event.origin !== this.baseUrl) {
       return;
     }
 
