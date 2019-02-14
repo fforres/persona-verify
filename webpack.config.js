@@ -1,7 +1,8 @@
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: "./src/index.ts",
   output: {
     filename: "index.js",
@@ -34,5 +35,9 @@ module.exports = {
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
     ],
+  },
+
+  optimization: {
+    minimizer: [new TerserPlugin()],
   },
 };
