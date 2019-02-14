@@ -8,7 +8,7 @@ export interface ClientOptions {
 
   onLoad?: () => void;
   onStart: (token: string) => void;
-  onSuccess: () => void;
+  onSuccess: (metadata: {}) => void;
   onExit?: () => void;
 }
 
@@ -96,7 +96,7 @@ export default class Client {
 
       case 'start':
         if (this.clientOptions.onStart !== undefined) {
-          this.clientOptions.onStart(event.data.metadata.token);
+          this.clientOptions.onStart(event.data.token);
         } else {
           console.log("Missing onStart callback");
         }
@@ -104,7 +104,7 @@ export default class Client {
 
       case 'success':
         if (this.clientOptions.onSuccess !== undefined) {
-          this.clientOptions.onSuccess();
+          this.clientOptions.onSuccess(event.data.metadata);
         } else {
           console.log("Missing onSuccess callback");
         }
