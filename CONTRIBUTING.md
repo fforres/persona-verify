@@ -8,7 +8,13 @@
 yarn install
 ```
 
-2. To test, run a static server and visit index.html in your browser.
+2. Compile with Webpack
+
+```
+webpack
+```
+
+3. To test, run a static server and visit index.html in your browser.
 
 ```
 python -m SimpleHTTPServer
