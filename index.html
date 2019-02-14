@@ -14,7 +14,15 @@
   <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
 
   <!-- Main -->
-  <script type="module" src="dist/index.js"></script>
+  <script type="text/javascript" src="dist/index.js"></script>
+  <script>
+  const client = new Persona.Client({
+    blueprintId: 'blu_biqYXr3aNfHuLeXUdJUNFNET',
+    onLoad: () => client.open(),
+    onStart: (token) => console.log(token),
+    onSuccess: () => {},
+  })
+  </script>
 </body>
 
 </html>
