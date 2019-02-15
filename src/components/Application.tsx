@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Widget from 'components/Widget';
 
@@ -29,9 +29,23 @@ const Overlay = styled('div')`
   bottom: 0;
   z-index: 9999;
 
-
-  @media only screen and (min-width: 600.02px) {
+  // When the widget is not the full screen, fixed keeps it in the center.
+  @media only screen and (min-width: 600.02px) and (min-height: 600.02px) {
     position: fixed;
+  }
+`;
+
+const OpenGlobalStyle = createGlobalStyle`
+  // Don't allow scrolling when widget is open
+  html body {
+    overflow: hidden !important;
+  }
+
+  // When the widget takes the full screen, we place it inline to prevent iOS scroll issues.
+  @media only screen and (max-width: 600px), (max-height: 600px) {
+    html body > *:not(#persona-widget-container) {
+      display: none !important;
+    }
   }
 `;
 
@@ -51,6 +65,7 @@ export default (props: ApplicationProps) => {
         blueprintId={props.blueprintId}
         personaBaseUrl={props.personaBaseUrl}
       />
+      {props.isOpen && <OpenGlobalStyle />}
     </Overlay>
   );
 }

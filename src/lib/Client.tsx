@@ -39,7 +39,12 @@ export default class Client {
     window.addEventListener("message", this.handleMessage);
 
     this.container = document.createElement('div');
-    document.children[0].append(this.container);
+    (this.container as any).setAttribute('id', 'persona-widget-container');
+    if (document.body) {
+      document.body.append(this.container);
+    } else {
+      document.children[0].append(this.container);
+    }
 
     this.render();
   }
@@ -58,21 +63,11 @@ export default class Client {
 
   open() {
     this.isOpen = true;
-
-    const htmlNode = document.getElementsByTagName("html")[0];
-    htmlNode.className += " persona-widget-open";
-
     this.render();
   }
 
   exit() {
     this.isOpen = false;
-
-    const htmlNode = document.getElementsByTagName("html")[0];
-    htmlNode.className = htmlNode.className.split(' ')
-      .filter(className => className !== 'persona-widget-open')
-      .join(' ');
-
     this.render();
   }
 
