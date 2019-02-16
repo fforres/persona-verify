@@ -7,7 +7,7 @@ export interface ClientOptions {
   environment?: string;
 
   onLoad?: () => void;
-  onStart: (token: string) => void;
+  onStart: (inquiryId: string) => void;
   onSuccess: (metadata: {}) => void;
   onExit?: () => void;
 }
@@ -91,7 +91,7 @@ export default class Client {
 
       case 'start':
         if (this.clientOptions.onStart !== undefined) {
-          this.clientOptions.onStart(event.data.token);
+          this.clientOptions.onStart(event.data['inquiry-id']);
         } else {
           console.log("Missing onStart callback");
         }

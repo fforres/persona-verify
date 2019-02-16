@@ -30,7 +30,7 @@ const client: Client = new Persona.Client({
   // This refers to a production demo blueprint owned by Persona
   blueprintId: 'persona-production_e1de83bf-e29f-48bb-9dae-568479b9edda',
   onLoad: () => client.open(),
-  onStart: (token: string) => console.log(token),
+  onStart: (inquiryId: string) => console.log(inquiryId),
   onSuccess: () => console.log('onSuccess'),
 });
 ```
