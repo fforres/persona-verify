@@ -94,7 +94,10 @@ export default class Client {
   }
 
   handleMessage = (event) => {
-    if (event.origin !== this.baseUrl) {
+    if (
+      event.origin !== this.baseUrl ||
+      event.data.blueprintId !== this.clientOptions.blueprintId
+    ) {
       return;
     }
 
