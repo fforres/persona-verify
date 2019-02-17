@@ -17,14 +17,24 @@
   <!-- Main -->
   <script type="text/javascript" src="dist/index.js"></script>
   <script>
-  const client = new Persona.Client({
+  const clientLending = new Persona.Client({
     blueprintId: 'blu_biqYXr3aNfHuLeXUdJUNFNET',
     environment: 'development',
-    onLoad: () => client.open(),
-    onStart: (inquiryId) => console.log(inquiryId),
+    onStart: (inquiryId) => console.log("Started lending: " + inquiryId),
     onSuccess: () => {},
   })
   </script>
+  <script>
+  const clientVapes = new Persona.Client({
+    blueprintId: 'blu_FWCe9QpnZxE1FRaAJ3ubqDkG',
+    environment: 'development',
+    onStart: (inquiryId) => console.log("Started vapes: " + inquiryId),
+    onSuccess: () => {},
+  })
+  </script>
+
+  <button onClick='clientLending.open()'>ACME lending</button>
+  <button onClick='clientVapes.open()'>ACME vapes</button>
 
   <div style="height: 600px"></div>
   BOTTOM OF PAGE

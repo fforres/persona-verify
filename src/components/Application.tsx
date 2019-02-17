@@ -35,6 +35,10 @@ const Overlay = styled('div')`
   }
 `;
 
+interface OpenGlobalStyleProps {
+  containerId: string;
+}
+
 const OpenGlobalStyle = createGlobalStyle`
   // Don't allow scrolling when widget is open
   html body {
@@ -43,7 +47,7 @@ const OpenGlobalStyle = createGlobalStyle`
 
   // When the widget takes the full screen, we place it inline to prevent iOS scroll issues.
   @media only screen and (max-width: 600px), (max-height: 600px) {
-    html body > *:not(#persona-widget-container) {
+    html body > *:not(#${(props: OpenGlobalStyleProps) => props.containerId}) {
       display: none !important;
     }
   }
@@ -51,6 +55,7 @@ const OpenGlobalStyle = createGlobalStyle`
 
 export interface ApplicationProps {
   blueprintId: string;
+  containerId: string;
   isLoading: boolean;
   isOpen: boolean;
   personaBaseUrl: string;
@@ -65,7 +70,7 @@ export default (props: ApplicationProps) => {
         blueprintId={props.blueprintId}
         personaBaseUrl={props.personaBaseUrl}
       />
-      {props.isOpen && <OpenGlobalStyle />}
+      {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}
     </Overlay>
   );
 }

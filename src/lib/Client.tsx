@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+
 import Application from 'components/Application';
 
 export interface ClientOptions {
@@ -14,6 +15,7 @@ export interface ClientOptions {
 
 export default class Client {
   private clientOptions: ClientOptions;
+  private containerId: string;
   private container: HTMLDivElement;
   private baseUrl: string;
 
@@ -22,6 +24,19 @@ export default class Client {
 
   constructor(options: ClientOptions) {
     this.clientOptions = options;
+
+    // User error handling
+    if (!options.blueprintId) {
+      throw new Error('blueprintId must be value string');
+    }
+    if (typeof options.onStart !== 'function') {
+      throw new Error('onStart callback must be function');
+    }
+    if (typeof options.onSuccess !== 'function') {
+      throw new Error('onSuccess callback must be function');
+    }
+
+    // Setup message handling
     switch(options.environment) {
       case 'development':
         this.baseUrl = 'http://localhost:3000';
@@ -35,11 +50,16 @@ export default class Client {
         this.baseUrl = 'https://withpersona.com';
         break;
     }
-
     window.addEventListener("message", this.handleMessage);
 
+    // Create container div
     this.container = document.createElement('div');
-    (this.container as any).setAttribute('id', 'persona-widget-container');
+    this.containerId = new Array(16).
+      fill(undefined).
+      map(() => Math.floor(Math.random() * 35).toString(35)).
+      join('');
+    (this.container as any).setAttribute('id', this.containerId);
+
     if (document.body) {
       document.body.append(this.container);
     } else {
@@ -53,6 +73,7 @@ export default class Client {
     ReactDOM.render(
       <Application
         blueprintId={this.clientOptions.blueprintId}
+        containerId={this.containerId}
         isLoading={this.isLoading}
         isOpen={this.isOpen}
         personaBaseUrl={this.baseUrl}
@@ -90,19 +111,11 @@ export default class Client {
         break;
 
       case 'start':
-        if (this.clientOptions.onStart !== undefined) {
-          this.clientOptions.onStart(event.data['inquiry-id']);
-        } else {
-          console.log("Missing onStart callback");
-        }
+        this.clientOptions.onStart(event.data['inquiry-id']);
         break;
 
       case 'success':
-        if (this.clientOptions.onSuccess !== undefined) {
-          this.clientOptions.onSuccess(event.data.metadata);
-        } else {
-          console.log("Missing onSuccess callback");
-        }
+        this.clientOptions.onSuccess(event.data.metadata);
         break;
     }
 
