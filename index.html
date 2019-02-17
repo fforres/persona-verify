@@ -20,16 +20,20 @@
   const clientLending = new Persona.Client({
     blueprintId: 'blu_biqYXr3aNfHuLeXUdJUNFNET',
     environment: 'development',
+    onLoad: () => console.log("onLoad"),
     onStart: (inquiryId) => console.log("Started lending: " + inquiryId),
-    onSuccess: () => {},
+    onSuccess: () => console.log("onSuccess"),
+    onEvent: (eventName, metadata) => console.log(eventName, metadata),
   })
   </script>
   <script>
   const clientVapes = new Persona.Client({
     blueprintId: 'blu_FWCe9QpnZxE1FRaAJ3ubqDkG',
     environment: 'development',
+    onLoad: () => console.log("onLoad"),
     onStart: (inquiryId) => console.log("Started vapes: " + inquiryId),
-    onSuccess: () => {},
+    onSuccess: () => console.log("onSuccess"),
+    onEvent: (eventName, metadata) => console.log(eventName, metadata),
   })
   </script>
 

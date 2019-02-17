@@ -28,7 +28,7 @@ describe('Client', () => {
       origin: 'https://withpersona.com',
       data: {
         action: 'start',
-        'inquiry-id': 'test-inquiry-id',
+        inquiryId: 'test-inquiry-id',
       },
     });
   })

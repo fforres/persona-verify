@@ -10,7 +10,8 @@ export interface ClientOptions {
   onLoad?: () => void;
   onStart: (inquiryId: string) => void;
   onSuccess: (metadata: {}) => void;
-  onExit?: () => void;
+  onExit?: (error: {} | undefined, metadata: {}) => void;
+  onEvent?: (eventName: string, metadata: {}) => void;
 }
 
 export default class Client {
@@ -104,18 +105,23 @@ export default class Client {
           this.clientOptions.onLoad();
         break;
 
-      case 'exit':
-        this.isOpen = false;
-        this.clientOptions.onExit &&
-          this.clientOptions.onExit();
-        break;
-
       case 'start':
-        this.clientOptions.onStart(event.data['inquiry-id']);
+        this.clientOptions.onStart(event.data.inquiryId);
         break;
 
       case 'success':
         this.clientOptions.onSuccess(event.data.metadata);
+        break;
+
+      case 'exit':
+        this.isOpen = false;
+        this.clientOptions.onExit &&
+          this.clientOptions.onExit(undefined, {});
+        break;
+
+      case 'generic':
+        this.clientOptions.onEvent &&
+          this.clientOptions.onEvent(event.data.eventName, event.data.metadata);
         break;
     }
 
