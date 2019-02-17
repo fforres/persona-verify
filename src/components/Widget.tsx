@@ -23,7 +23,7 @@ const slideDown = keyframes`
   }
 `;
 
-const Positioner = styled('iframe')`
+const Iframe = styled('iframe')`
   animation: ${genieSlideIn} .3s, ${slideDown} ease-out .3s;
 
   width: 100%;
@@ -59,12 +59,12 @@ export default (props: WidgetProps) => {
   });
 
   return (
-    <Positioner
+    <Iframe
         allow='camera'
         sandbox='allow-same-origin allow-scripts allow-forms allow-popups allow-modals'
         frameBorder='0'
         src={props.personaBaseUrl + '/widget/v1?' + queryParams}
       >
-    </Positioner>
+    </Iframe>
   );
 }
