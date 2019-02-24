@@ -50,6 +50,7 @@ const Iframe = styled('iframe')`
 export interface WidgetProps {
   blueprintId: string;
   personaBaseUrl: string;
+  refIframe: React.RefObject<HTMLIFrameElement>;
 }
 
 export default (props: WidgetProps) => {
@@ -60,11 +61,12 @@ export default (props: WidgetProps) => {
 
   return (
     <Iframe
-        allow='camera'
-        sandbox='allow-same-origin allow-scripts allow-forms allow-popups allow-modals'
-        frameBorder='0'
-        src={props.personaBaseUrl + '/widget/v1?' + queryParams}
-      >
+      allow='camera'
+      sandbox='allow-same-origin allow-scripts allow-forms allow-popups allow-modals'
+      frameBorder='0'
+      ref={props.refIframe}
+      src={props.personaBaseUrl + '/widget?' + queryParams}
+    >
     </Iframe>
   );
 }

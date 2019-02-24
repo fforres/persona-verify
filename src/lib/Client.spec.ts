@@ -27,6 +27,7 @@ describe('Client', () => {
     client.handleMessage({
       origin: 'https://withpersona.com',
       data: {
+        blueprintId: 'test-blueprint-id',
         action: 'start',
         inquiryId: 'test-inquiry-id',
       },

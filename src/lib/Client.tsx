@@ -19,12 +19,14 @@ export default class Client {
   private containerId: string;
   private container: HTMLDivElement;
   private baseUrl: string;
+  private refIframe: React.RefObject<HTMLIFrameElement>;
 
   private isLoading: boolean = true;
   private isOpen: boolean = false;
 
   constructor(options: ClientOptions) {
     this.clientOptions = options;
+    this.refIframe = React.createRef();
 
     // User error handling
     if (!options.blueprintId) {
@@ -73,6 +75,7 @@ export default class Client {
   render() {
     ReactDOM.render(
       <Application
+        refIframe={this.refIframe}
         blueprintId={this.clientOptions.blueprintId}
         containerId={this.containerId}
         isLoading={this.isLoading}
@@ -88,8 +91,13 @@ export default class Client {
     this.render();
   }
 
-  exit() {
-    this.isOpen = false;
+  exit(force: boolean) {
+    if (this.refIframe.current) {
+      (this.refIframe.current as any).contentWindow.postMessage({
+        action: 'exit',
+        metadata: { force },
+      }, this.baseUrl);
+    }
     this.render();
   }
 
