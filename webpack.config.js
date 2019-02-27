@@ -3,9 +3,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: "./src/index.ts",
+  entry: "./src/persona.ts",
   output: {
-    filename: "index.js",
+    filename: "persona.js",
     path: __dirname + "/dist",
     "libraryTarget": "umd",
   },
