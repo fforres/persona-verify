@@ -13,7 +13,7 @@ The official javascript client library for the Persona API.
 ## Install
 
 ```
-npm install persona-verify`
+npm install persona
 ```
 
 ## Documentation
@@ -25,7 +25,7 @@ The module provides a client for the Persona embedded flow.  For complete inform
 To open the flow you must create a `Client` object.
 
 ```javascript
-const Persona = require('persona-verify');
+const Persona = require('persona');
 const client: Client = new Persona.Client({
   // This refers to a production demo blueprint owned by Persona
   blueprintId: 'persona-production_e1de83bf-e29f-48bb-9dae-568479b9edda',
