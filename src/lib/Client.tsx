@@ -49,6 +49,10 @@ export default class Client {
         this.baseUrl = 'https://sandbox.withpersona.com';
         break;
 
+      case 'staging':
+        this.baseUrl = 'https://staging.withpersona.com';
+        break;
+
       default:
         this.baseUrl = 'https://withpersona.com';
         break;
