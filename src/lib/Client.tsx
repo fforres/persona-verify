@@ -61,7 +61,7 @@ export default class Client {
 
     // Create container div
     this.container = document.createElement('div');
-    this.containerId = new Array(16).
+    this.containerId = "persona-widget-" + new Array(16).
       fill(undefined).
       map(() => Math.floor(Math.random() * 35).toString(35)).
       join('');
