@@ -61,16 +61,15 @@ export default class Client {
 
     // Create container div
     this.container = document.createElement('div');
-    this.containerId = "persona-widget-" + new Array(16).
-      fill(undefined).
+    this.containerId = "persona-widget-" + [...new Array(16)].
       map(() => Math.floor(Math.random() * 35).toString(35)).
       join('');
     (this.container as any).setAttribute('id', this.containerId);
 
     if (document.body) {
-      document.body.append(this.container);
+      document.body.appendChild(this.container);
     } else {
-      document.children[0].append(this.container);
+      document.children[0].appendChild(this.container);
     }
 
     this.render();

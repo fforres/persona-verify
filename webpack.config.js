@@ -1,5 +1,4 @@
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -7,7 +6,7 @@ module.exports = {
   output: {
     filename: "persona.js",
     path: __dirname + "/dist",
-    "libraryTarget": "umd",
+    libraryTarget: "umd",
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -25,19 +24,14 @@ module.exports = {
 
   module: {
     rules: [
-      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
         loader: "awesome-typescript-loader",
         exclude: /node_modules/,
       },
 
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      // Primarily for third party modules
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
     ],
-  },
-
-  optimization: {
-    minimizer: [new TerserPlugin()],
   },
 };
