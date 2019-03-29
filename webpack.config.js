@@ -25,8 +25,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: "awesome-typescript-loader",
+        test: /(\.jsx?|\.tsx?)$/,
+        // Modules are run last to first, so this must be ahead of the typescript loader.
+        loader: ['babel-loader', 'awesome-typescript-loader'],
         exclude: /node_modules/,
       },
 

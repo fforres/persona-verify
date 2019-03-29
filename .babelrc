@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": "commonjs",
+        "targets": {
+          "browsers": "> 1%",
+          "ie": "11",
+        },
+        "forceAllTransforms": true,
+        "useBuiltIns": "usage",
+        "corejs": "3.0.0",
+      },
+    ],
+  ],
+}

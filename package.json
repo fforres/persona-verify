@@ -8,6 +8,7 @@
   "license": "MIT",
   "sideEffects": false,
   "dependencies": {
+    "core-js": "^3.0.0",
     "query-string": "5.1.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
