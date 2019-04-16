@@ -61,6 +61,7 @@ export interface ApplicationProps {
   isOpen: boolean;
   personaBaseUrl: string;
   refIframe: React.RefObject<HTMLIFrameElement>;
+  subject: string;
 }
 
 export default (props: ApplicationProps) => {
@@ -72,6 +73,7 @@ export default (props: ApplicationProps) => {
         blueprintId={props.blueprintId}
         personaBaseUrl={props.personaBaseUrl}
         refIframe={props.refIframe}
+        subject={props.subject}
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}
     </Overlay>

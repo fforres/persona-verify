@@ -51,12 +51,14 @@ export interface WidgetProps {
   blueprintId: string;
   personaBaseUrl: string;
   refIframe: React.RefObject<HTMLIFrameElement>;
+  subject: string;
 }
 
 export default (props: WidgetProps) => {
   const queryParams = queryString.stringify({
     'blueprint-id': props.blueprintId,
     'iframe-origin': window.location.origin,
+    subject: props.subject,
   });
 
   return (

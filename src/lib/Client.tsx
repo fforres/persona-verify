@@ -6,6 +6,7 @@ import Application from 'components/Application';
 export interface ClientOptions {
   blueprintId: string;
   environment?: string;
+  subject?: string;
 
   onLoad?: () => void;
   onStart: (inquiryId: string) => void;
@@ -80,6 +81,7 @@ export default class Client {
       <Application
         refIframe={this.refIframe}
         blueprintId={this.clientOptions.blueprintId}
+        subject={this.clientOptions.subject}
         containerId={this.containerId}
         isLoading={this.isLoading}
         isOpen={this.isOpen}
