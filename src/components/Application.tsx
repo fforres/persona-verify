@@ -59,6 +59,7 @@ export interface ApplicationProps {
   containerId: string;
   isLoading: boolean;
   isOpen: boolean;
+  language: string;
   personaBaseUrl: string;
   refIframe: React.RefObject<HTMLIFrameElement>;
   subject: string;
@@ -71,6 +72,7 @@ export default (props: ApplicationProps) => {
 
       <Widget
         blueprintId={props.blueprintId}
+        language={props.language}
         personaBaseUrl={props.personaBaseUrl}
         refIframe={props.refIframe}
         subject={props.subject}
