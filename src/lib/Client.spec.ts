@@ -31,7 +31,7 @@ describe('Client', () => {
         blueprintId: 'test-blueprint-id',
         themeId: 'test-theme-id',
         action: 'start',
-        inquiryId: 'test-inquiry-id',
+        metadata: { inquiryId: 'test-inquiry-id', },
       },
     });
   })

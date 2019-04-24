@@ -118,7 +118,7 @@ export default class Client {
       return;
     }
 
-    switch (event.data.action) {
+    switch (event.data.name) {
       case 'load':
         this.isLoading = false;
         this.clientOptions.onLoad &&
@@ -126,7 +126,7 @@ export default class Client {
         break;
 
       case 'start':
-        this.clientOptions.onStart(event.data.inquiryId);
+        this.clientOptions.onStart(event.data.metadata.inquiryId);
         break;
 
       case 'success':
