@@ -5,6 +5,7 @@ import Application from 'components/Application';
 
 export interface ClientOptions {
   blueprintId: string;
+  themeId: string;
   environment?: string;
   language?: string;
   subject?: string;
@@ -82,6 +83,7 @@ export default class Client {
       <Application
         refIframe={this.refIframe}
         blueprintId={this.clientOptions.blueprintId}
+        themeId={this.clientOptions.themeId}
         language={this.clientOptions.language}
         subject={this.clientOptions.subject}
         containerId={this.containerId}

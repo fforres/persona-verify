@@ -49,6 +49,7 @@ const Iframe = styled('iframe')`
 
 export interface WidgetProps {
   blueprintId: string;
+  themeId: string;
   language: string;
   personaBaseUrl: string;
   refIframe: React.RefObject<HTMLIFrameElement>;
@@ -61,6 +62,7 @@ export default (props: WidgetProps) => {
     'iframe-origin': window.location.origin,
     language: props.language,
     subject: props.subject,
+    'theme-id': props.themeId,
   });
 
   return (

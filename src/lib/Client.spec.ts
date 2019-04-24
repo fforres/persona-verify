@@ -6,6 +6,7 @@ describe('Client', () => {
 
   const client = new Client({
     blueprintId: 'test-blueprint-id',
+    themeId: 'test-theme-id',
     onStart: mockHandleStart,
     onSuccess: mockHandleSuccess,
   });
@@ -28,6 +29,7 @@ describe('Client', () => {
       origin: 'https://withpersona.com',
       data: {
         blueprintId: 'test-blueprint-id',
+        themeId: 'test-theme-id',
         action: 'start',
         inquiryId: 'test-inquiry-id',
       },

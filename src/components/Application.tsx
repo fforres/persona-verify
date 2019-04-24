@@ -56,6 +56,7 @@ const OpenGlobalStyle = createGlobalStyle`
 
 export interface ApplicationProps {
   blueprintId: string;
+  themeId: string;
   containerId: string;
   isLoading: boolean;
   isOpen: boolean;
@@ -72,6 +73,7 @@ export default (props: ApplicationProps) => {
 
       <Widget
         blueprintId={props.blueprintId}
+        themeId={props.themeId}
         language={props.language}
         personaBaseUrl={props.personaBaseUrl}
         refIframe={props.refIframe}
