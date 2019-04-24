@@ -24,16 +24,12 @@ const Overlay = styled('div')`
   background-color: rgba(0, 0, 0, .3);
   display: ${(props: OverlayProps) => props.isOpen ? 'block' : 'none'};
 
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 9999;
-
-  // When the widget is not the full screen, fixed keeps it in the center.
-  @media ${MEDIA_QUERIES.isNotMobile} {
-    position: fixed;
-  }
 `;
 
 interface OpenGlobalStyleProps {
