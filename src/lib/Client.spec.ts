@@ -30,7 +30,7 @@ describe('Client', () => {
       data: {
         blueprintId: 'test-blueprint-id',
         themeId: 'test-theme-id',
-        action: 'start',
+        name: 'start',
         metadata: { inquiryId: 'test-inquiry-id', },
       },
     });
