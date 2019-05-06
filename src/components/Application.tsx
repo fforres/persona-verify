@@ -1,8 +1,11 @@
 import * as React from 'react';
 import styled, { keyframes, createGlobalStyle } from 'styled-components';
+
 import LoadingIndicator from 'components/LoadingIndicator';
 import Widget from 'components/Widget';
 import { MEDIA_QUERIES } from 'lib/styles';
+import { PrefillAttributes } from 'lib/interfaces';
+import { ClientOptions } from 'lib/Client';
 
 const fadeIn = keyframes`
   from {
@@ -51,15 +54,12 @@ const OpenGlobalStyle = createGlobalStyle`
 `;
 
 export interface ApplicationProps {
-  blueprintId: string;
-  themeId: string;
+  clientOptions: ClientOptions;
   containerId: string;
   isLoading: boolean;
   isOpen: boolean;
-  language: string;
   personaBaseUrl: string;
   refIframe: React.RefObject<HTMLIFrameElement>;
-  subject: string;
 }
 
 export default (props: ApplicationProps) => {
@@ -68,12 +68,13 @@ export default (props: ApplicationProps) => {
       {props.isLoading && <LoadingIndicator  />}
 
       <Widget
-        blueprintId={props.blueprintId}
-        themeId={props.themeId}
-        language={props.language}
+        blueprintId={props.clientOptions.blueprintId}
+        themeId={props.clientOptions.themeId}
+        language={props.clientOptions.language}
         personaBaseUrl={props.personaBaseUrl}
+        prefill={props.clientOptions.prefill}
         refIframe={props.refIframe}
-        subject={props.subject}
+        subject={props.clientOptions.subject}
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}
     </Overlay>

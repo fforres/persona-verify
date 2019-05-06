@@ -1,6 +1,8 @@
 import * as React from 'react';
-import * as queryString from 'query-string';
+import * as qs from 'qs';
 import styled, { keyframes } from 'styled-components';
+
+import { PrefillAttributes } from 'lib/interfaces';
 
 const genieSlideIn = keyframes`
   from {
@@ -52,17 +54,29 @@ export interface WidgetProps {
   themeId: string;
   language: string;
   personaBaseUrl: string;
+  prefill?: PrefillAttributes;
   refIframe: React.RefObject<HTMLIFrameElement>;
   subject: string;
 }
 
 export default (props: WidgetProps) => {
-  const queryParams = queryString.stringify({
+  const prefill = props.prefill || {} as PrefillAttributes;
+  const queryParams = qs.stringify({
     'blueprint-id': props.blueprintId,
     'iframe-origin': window.location.origin,
     language: props.language,
     subject: props.subject,
     'theme-id': props.themeId,
+    prefill: {
+      'name-first': prefill.nameFirst,
+      'name-last': prefill.nameLast,
+      'birthdate': prefill.birthdate,
+      'address-street-1': prefill.addressStreet1,
+      'address-street-2': prefill.addressStreet2,
+      'address-city': prefill.addressCity,
+      'address-subdivision': prefill.addressSubdivision,
+      'address-postal-code': prefill.addressPostalCode,
+    },
   });
 
   return (

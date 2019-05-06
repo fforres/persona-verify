@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Application from 'components/Application';
+import { PrefillAttributes } from 'lib/interfaces';
 
 export interface ClientOptions {
   blueprintId: string;
@@ -9,6 +10,7 @@ export interface ClientOptions {
   environment?: string;
   language?: string;
   subject?: string;
+  prefill?: PrefillAttributes;
 
   onLoad?: () => void;
   onStart: (inquiryId: string) => void;
@@ -81,15 +83,12 @@ export default class Client {
   render() {
     ReactDOM.render(
       <Application
-        refIframe={this.refIframe}
-        blueprintId={this.clientOptions.blueprintId}
-        themeId={this.clientOptions.themeId}
-        language={this.clientOptions.language}
-        subject={this.clientOptions.subject}
+        clientOptions={this.clientOptions}
         containerId={this.containerId}
         isLoading={this.isLoading}
         isOpen={this.isOpen}
         personaBaseUrl={this.baseUrl}
+        refIframe={this.refIframe}
       />,
       this.container,
     );
