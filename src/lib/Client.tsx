@@ -13,8 +13,9 @@ export interface ClientOptions {
   prefill?: PrefillAttributes;
 
   onLoad?: () => void;
-  onStart: (inquiryId: string) => void;
-  onSuccess: (metadata: {}) => void;
+  onStart?: (inquiryId: string) => void;
+  onSuccess?: (metadata: {}) => void;
+  onComplete?: (metadata: {}) => void;
   onExit?: (error: {} | undefined, metadata: {}) => void;
   onEvent?: (eventName: string, metadata: {}) => void;
 }
@@ -37,11 +38,8 @@ export default class Client {
     if (!options.blueprintId) {
       throw new Error('blueprintId must be value string');
     }
-    if (typeof options.onStart !== 'function') {
-      throw new Error('onStart callback must be function');
-    }
-    if (typeof options.onSuccess !== 'function') {
-      throw new Error('onSuccess callback must be function');
+    if (typeof options.onSuccess !== 'function' && typeof options.onComplete !== 'function') {
+      throw new Error('onSuccess or onComplete callback must be function');
     }
 
     // Setup message handling
@@ -125,11 +123,18 @@ export default class Client {
         break;
 
       case 'start':
-        this.clientOptions.onStart(event.data.metadata.inquiryId);
+        this.clientOptions.onStart &&
+          this.clientOptions.onStart(event.data.metadata.inquiryId);
         break;
 
       case 'success':
-        this.clientOptions.onSuccess(event.data.metadata);
+        this.clientOptions.onSuccess &&
+          this.clientOptions.onSuccess(event.data.metadata);
+        break;
+
+      case 'complete':
+        this.clientOptions.onComplete &&
+          this.clientOptions.onComplete(event.data.metadata);
         break;
 
       case 'exit':

@@ -31,8 +31,7 @@
     blueprintId: 'blu_FWCe9QpnZxE1FRaAJ3ubqDkG',
     environment: 'development',
     onLoad: () => console.log("onLoad"),
-    onStart: (inquiryId) => console.log("Started vapes: " + inquiryId),
-    onSuccess: () => console.log("onSuccess"),
+    onComplete: (metadata) => console.log("onComplete: " + JSON.stringify(metadata)),
     onEvent: (eventName, metadata) => console.log(eventName, metadata),
   })
   </script>
