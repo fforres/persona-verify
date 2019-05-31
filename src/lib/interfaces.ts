@@ -7,4 +7,5 @@ export interface PrefillAttributes {
   addressCity: string;
   addressSubdivision: string;
   addressPostalCode: string;
+  countryCode: string;
 }

@@ -76,6 +76,7 @@ export default (props: WidgetProps) => {
       'address-city': prefill.addressCity,
       'address-subdivision': prefill.addressSubdivision,
       'address-postal-code': prefill.addressPostalCode,
+      'country-code': prefill.countryCode,
     },
   });
 
