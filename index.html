@@ -23,7 +23,7 @@
     onLoad: () => console.log("onLoad"),
     onStart: (inquiryId) => console.log("Started lending: " + inquiryId),
     onSuccess: () => console.log("onSuccess"),
-    onEvent: (eventName, metadata) => console.log(eventName, metadata),
+    onEvent: (name, metadata) => console.log(name, metadata),
   })
   </script>
   <script>
@@ -32,7 +32,7 @@
     environment: 'development',
     onLoad: () => console.log("onLoad"),
     onComplete: (metadata) => console.log("onComplete: " + JSON.stringify(metadata)),
-    onEvent: (eventName, metadata) => console.log(eventName, metadata),
+    onEvent: (name, metadata) => console.log(name, metadata),
   })
   </script>
 

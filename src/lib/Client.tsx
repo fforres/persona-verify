@@ -17,7 +17,7 @@ export interface ClientOptions {
   onSuccess?: (metadata: {}) => void;
   onComplete?: (metadata: {}) => void;
   onExit?: (error: {} | undefined, metadata: {}) => void;
-  onEvent?: (eventName: string, metadata: {}) => void;
+  onEvent?: (name: string, metadata: {}) => void;
 }
 
 export default class Client {
@@ -143,9 +143,9 @@ export default class Client {
           this.clientOptions.onExit(undefined, {});
         break;
 
-      case 'generic':
+      default:
         this.clientOptions.onEvent &&
-          this.clientOptions.onEvent(event.data.eventName, event.data.metadata);
+          this.clientOptions.onEvent(event.data.name, event.data.metadata);
         break;
     }
 
