@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Application from 'components/Application';
-import { PrefillAttributes } from 'lib/interfaces';
+import { PrefillAttributes, ClientError } from 'lib/interfaces';
 
 export interface ClientOptions {
   blueprintId: string;
@@ -12,11 +12,11 @@ export interface ClientOptions {
   subject?: string;
   prefill?: PrefillAttributes;
 
-  onLoad?: () => void;
+  onLoad?: (error: ClientError) => void;
   onStart?: (inquiryId: string) => void;
   onSuccess?: (metadata: {}) => void;
   onComplete?: (metadata: {}) => void;
-  onExit?: (error: {} | undefined, metadata: {}) => void;
+  onExit?: (error: ClientError | undefined, metadata: {}) => void;
   onEvent?: (name: string, metadata: {}) => void;
 }
 
@@ -119,7 +119,7 @@ export default class Client {
       case 'load':
         this.isLoading = false;
         this.clientOptions.onLoad &&
-          this.clientOptions.onLoad();
+          this.clientOptions.onLoad(event.data.error);
         break;
 
       case 'start':
@@ -140,7 +140,7 @@ export default class Client {
       case 'exit':
         this.isOpen = false;
         this.clientOptions.onExit &&
-          this.clientOptions.onExit(undefined, {});
+          this.clientOptions.onExit(event.data.error, {});
         break;
 
       default:

@@ -87,6 +87,9 @@ export default (props: WidgetProps) => {
       frameBorder='0'
       ref={props.refIframe}
       src={props.personaBaseUrl + '/widget?' + queryParams}
+      onLoad={() => {
+        // TODO: check contents
+      }}
     >
     </Iframe>
   );

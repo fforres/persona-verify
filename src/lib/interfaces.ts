@@ -9,3 +9,9 @@ export interface PrefillAttributes {
   addressPostalCode: string;
   countryCode: string;
 }
+
+export interface ClientError {
+  status: number;
+  code: string;
+  message: string;
+}
