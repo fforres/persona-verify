@@ -66,6 +66,7 @@ export default (props: WidgetProps) => {
   const prefill = props.prefill || {} as PrefillAttributes;
   const queryParams = qs.stringify({
     'blueprint-id': props.blueprintId,
+    environment: props.environment,
     'iframe-origin': window.location.origin,
     'inquiry-id': props.inquiryId,
     language: props.language,

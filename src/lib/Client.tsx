@@ -52,14 +52,11 @@ export default class Client {
         this.baseUrl = 'http://localhost:3000';
         break;
 
-      case 'sandbox':
-        this.baseUrl = 'https://sandbox.withpersona.com';
-        break;
-
       case 'staging':
         this.baseUrl = 'https://staging.withpersona.com';
         break;
 
+      case 'sandbox':
       default:
         this.baseUrl = 'https://withpersona.com';
         break;
