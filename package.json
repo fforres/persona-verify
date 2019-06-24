@@ -1,6 +1,6 @@
 {
   "name": "persona",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "The official web client library for the Persona API.",
   "main": "index.js",
   "repository": "https://github.com/persona-id/persona-verify.git",
