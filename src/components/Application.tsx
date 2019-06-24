@@ -70,10 +70,13 @@ export default (props: ApplicationProps) => {
       <Widget
         blueprintId={props.clientOptions.blueprintId}
         themeId={props.clientOptions.themeId}
+        environment={props.clientOptions.environment}
+        inquiryId={props.clientOptions.inquiryId}
         language={props.clientOptions.language}
         personaBaseUrl={props.personaBaseUrl}
         prefill={props.clientOptions.prefill}
         refIframe={props.refIframe}
+        sessionToken={props.clientOptions.sessionToken}
         subject={props.clientOptions.subject}
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}

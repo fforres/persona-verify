@@ -52,11 +52,14 @@ const Iframe = styled('iframe')`
 export interface WidgetProps {
   blueprintId: string;
   themeId: string;
+  environment?: string;
+  inquiryId?: string;
   language: string;
   personaBaseUrl: string;
   prefill?: PrefillAttributes;
   refIframe: React.RefObject<HTMLIFrameElement>;
-  subject: string;
+  sessionToken?: string;
+  subject?: string;
 }
 
 export default (props: WidgetProps) => {
@@ -64,7 +67,9 @@ export default (props: WidgetProps) => {
   const queryParams = qs.stringify({
     'blueprint-id': props.blueprintId,
     'iframe-origin': window.location.origin,
+    'inquiry-id': props.inquiryId,
     language: props.language,
+    'session-token': props.sessionToken,
     subject: props.subject,
     'theme-id': props.themeId,
     prefill: {

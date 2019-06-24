@@ -6,10 +6,14 @@ import { PrefillAttributes, ClientError } from 'lib/interfaces';
 
 export interface ClientOptions {
   blueprintId: string;
-  themeId: string;
+  themeId?: string;
   environment?: string;
-  language?: string;
   subject?: string;
+
+  inquiryId?: string;
+  sessionToken?: string;
+
+  language?: string;
   prefill?: PrefillAttributes;
 
   onLoad?: (error: ClientError) => void;
