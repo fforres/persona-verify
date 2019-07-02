@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled, { keyframes, createGlobalStyle } from 'styled-components';
 
-import LoadingIndicator from 'components/LoadingIndicator';
+import CenteredFrame from 'components/CenteredFrame';
+import LoadingSpinner from 'components/LoadingSpinner';
 import Widget from 'components/Widget';
 import { MEDIA_QUERIES } from 'lib/styles';
-import { PrefillAttributes } from 'lib/interfaces';
 import { ClientOptions } from 'lib/Client';
 
 const fadeIn = keyframes`
@@ -53,6 +53,10 @@ const OpenGlobalStyle = createGlobalStyle`
   }
 `;
 
+const LoadingText = styled('p')`
+  font-family: sans-serif;
+`;
+
 export interface ApplicationProps {
   clientOptions: ClientOptions;
   containerId: string;
@@ -65,7 +69,11 @@ export interface ApplicationProps {
 export default (props: ApplicationProps) => {
   return (
     <Overlay isOpen={props.isOpen}>
-      {props.isLoading && <LoadingIndicator  />}
+      {props.isLoading &&
+        <CenteredFrame>
+          <LoadingSpinner />
+        </CenteredFrame>
+      }
 
       <Widget
         blueprintId={props.clientOptions.blueprintId}

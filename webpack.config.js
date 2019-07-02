@@ -30,6 +30,11 @@ module.exports = {
         loader: ['babel-loader', 'awesome-typescript-loader'],
         exclude: /node_modules/,
       },
+      {
+        test: /(\.svg)$/,
+        loader: ['react-svg-loader'],
+        exclude: /node_modules/,
+      },
 
       // Primarily for third party modules
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
