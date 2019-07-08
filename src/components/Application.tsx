@@ -53,10 +53,6 @@ const OpenGlobalStyle = createGlobalStyle`
   }
 `;
 
-const LoadingText = styled('p')`
-  font-family: sans-serif;
-`;
-
 export interface ApplicationProps {
   clientOptions: ClientOptions;
   containerId: string;

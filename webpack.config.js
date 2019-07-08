@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         test: /(\.svg)$/,
-        loader: ['react-svg-loader'],
+        loader: ['babel-loader', 'react-svg-loader'],
         exclude: /node_modules/,
       },
 
