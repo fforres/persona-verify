@@ -8,6 +8,7 @@ export interface ClientOptions {
   blueprintId: string;
   themeId?: string;
   environment?: string;
+  host?: string;
   subject?: string;
 
   inquiryId?: string;
@@ -47,7 +48,7 @@ export default class Client {
     }
 
     // Setup message handling
-    switch(options.environment) {
+    switch(options.host) {
       case 'development':
         this.baseUrl = 'http://localhost:3000';
         break;
@@ -56,7 +57,6 @@ export default class Client {
         this.baseUrl = 'https://staging.withpersona.com';
         break;
 
-      case 'sandbox':
       default:
         this.baseUrl = 'https://withpersona.com';
         break;
