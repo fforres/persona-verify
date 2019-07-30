@@ -10,6 +10,7 @@ export interface ClientOptions {
   environment?: string;
   host?: string;
   subject?: string;
+  referenceId?: string;
 
   inquiryId?: string;
   sessionToken?: string;
