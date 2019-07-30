@@ -82,6 +82,7 @@ export default (props: ApplicationProps) => {
         refIframe={props.refIframe}
         sessionToken={props.clientOptions.sessionToken}
         subject={props.clientOptions.subject}
+        referenceId={props.clientOptions.referenceId}
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}
     </Overlay>

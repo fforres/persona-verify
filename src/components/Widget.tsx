@@ -60,6 +60,7 @@ export interface WidgetProps {
   refIframe: React.RefObject<HTMLIFrameElement>;
   sessionToken?: string;
   subject?: string;
+  referenceId?: string;
 }
 
 export default (props: WidgetProps) => {
@@ -72,6 +73,7 @@ export default (props: WidgetProps) => {
     language: props.language,
     'session-token': props.sessionToken,
     subject: props.subject,
+    'reference-id': props.referenceId,
     'theme-id': props.themeId,
     prefill: {
       'name-first': prefill.nameFirst,
