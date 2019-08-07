@@ -41,7 +41,7 @@ const Iframe = styled('iframe')`
   background-color: #FFFFFF;
   border: none;
   border-radius: 4px;
-  box-shadow: 0px 12px 40px 2px #555555;
+  box-shadow: 0px 12px 40px 2px rgba(0, 0, 0, 0.4);
 
   @media only screen and (min-width: 600.02px) and (min-height: 600.02px) {
     max-width: 400px;
