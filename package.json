@@ -45,6 +45,9 @@
       "js",
       "json"
     ],
+    "moduleNameMapper": {
+      "\\.(svg)$": "<rootDir>/src/spec/svgMock.tsx"
+    },
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
