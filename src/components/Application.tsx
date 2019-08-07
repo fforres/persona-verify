@@ -8,13 +8,15 @@ import Widget from 'components/Widget';
 import { MEDIA_QUERIES } from 'lib/styles';
 import { ClientOptions } from 'lib/Client';
 
+const OVERLAY_OPACITY = 0.7;
+
 const fadeIn = keyframes`
   from {
     background-color: rgba(0, 0, 0, 0);
     opacity: 0;
   }
   to {
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, ${OVERLAY_OPACITY});
     opacity: 1;
   }
 `;
@@ -25,7 +27,7 @@ interface OverlayProps {
 
 const Overlay = styled('div')`
   animation: ${fadeIn} .3s;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, ${OVERLAY_OPACITY});
   display: ${(props: OverlayProps) => props.isOpen ? 'block' : 'none'};
 
   position: fixed;
