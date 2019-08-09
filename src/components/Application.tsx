@@ -3,6 +3,7 @@ import styled, { keyframes, createGlobalStyle } from 'styled-components';
 
 import CenteredFrame from 'components/CenteredFrame';
 import LoadingSpinner from 'components/LoadingSpinner';
+import Logo from 'images/logo.svg';
 import Widget from 'components/Widget';
 import { MEDIA_QUERIES } from 'lib/styles';
 import { ClientOptions } from 'lib/Client';
@@ -35,11 +36,36 @@ const Overlay = styled('div')`
   z-index: 9999;
 `;
 
+const PoweredBy = styled('a')`
+  position: absolute;
+  bottom: 8px;
+  right: 8px
+
+  color: white;
+  font-family: 'Rubik', sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+
+  @media ${MEDIA_QUERIES.isMobile} {
+    display: none;
+  }
+`
+
+const PersonaLogo = styled('div')`
+  margin-left: 4px;
+  padding-top: 3px;
+`
+
 interface OpenGlobalStyleProps {
   containerId: string;
 }
 
 const OpenGlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
   // Don't allow scrolling when widget is open
   html body {
     overflow: hidden !important;
@@ -85,6 +111,8 @@ export default (props: ApplicationProps) => {
         referenceId={props.clientOptions.referenceId}
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}
+
+      <PoweredBy href='https://withpersona.com' target='_blank'>Powered by <PersonaLogo><Logo/></PersonaLogo></PoweredBy>
     </Overlay>
   );
 }
