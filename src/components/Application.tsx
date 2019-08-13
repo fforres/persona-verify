@@ -58,7 +58,7 @@ const PoweredBy = styled('a')`
 
 const PersonaLogo = styled('div')`
   margin-left: 4px;
-  padding-top: 3px;
+  padding-top: 2px;
 `
 
 interface OpenGlobalStyleProps {
