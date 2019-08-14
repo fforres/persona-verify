@@ -38,7 +38,7 @@ const Overlay = styled('div')`
   z-index: 9999;
 `;
 
-const PoweredBy = styled('a')`
+const PoweredBy = styled('div')`
   position: absolute;
   bottom: 8px;
   right: 8px
@@ -46,7 +46,6 @@ const PoweredBy = styled('a')`
   color: white;
   font-family: 'Rubik', sans-serif;
   font-size: 12px;
-  text-decoration: none;
 
   display: flex;
   align-items: center;
@@ -114,7 +113,7 @@ export default (props: ApplicationProps) => {
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}
 
-      <PoweredBy href='https://withpersona.com' target='_blank'>Powered by <PersonaLogo><Logo/></PersonaLogo></PoweredBy>
+      <PoweredBy>Powered by <PersonaLogo><Logo/></PersonaLogo></PoweredBy>
     </Overlay>
   );
 }
