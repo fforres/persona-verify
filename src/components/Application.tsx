@@ -93,7 +93,7 @@ export default (props: ApplicationProps) => {
       }
 
       <Widget
-        blueprintId={props.clientOptions.blueprintId}
+        templateId={props.clientOptions.templateId || props.clientOptions.blueprintId}
         themeId={props.clientOptions.themeId}
         environment={props.clientOptions.environment}
         inquiryId={props.clientOptions.inquiryId}

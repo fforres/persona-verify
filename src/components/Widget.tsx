@@ -50,7 +50,7 @@ const Iframe = styled('iframe')`
 `;
 
 export interface WidgetProps {
-  blueprintId: string;
+  templateId: string;
   themeId: string;
   environment?: string;
   inquiryId?: string;
@@ -66,7 +66,8 @@ export interface WidgetProps {
 export default (props: WidgetProps) => {
   const prefill = props.prefill || {} as PrefillAttributes;
   const queryParams = qs.stringify({
-    'blueprint-id': props.blueprintId,
+    // TODO: v3 - remove deprecated blueprintId
+    'blueprint-id': props.templateId,
     environment: props.environment,
     'iframe-origin': window.location.origin,
     'inquiry-id': props.inquiryId,

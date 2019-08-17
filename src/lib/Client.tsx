@@ -5,7 +5,9 @@ import Application from 'components/Application';
 import { PrefillAttributes, ClientError } from 'lib/interfaces';
 
 export interface ClientOptions {
-  blueprintId: string;
+  // TODO: v3 - remove deprecated blueprintId
+  blueprintId?: string;
+  templateId?: string;
   themeId?: string;
   environment?: string;
   host?: string;
@@ -41,8 +43,9 @@ export default class Client {
     this.refIframe = React.createRef();
 
     // User error handling
-    if (!options.blueprintId) {
-      throw new Error('blueprintId must be value string');
+    // TODO: v3 - remove deprecated blueprintId
+    if (!options.templateId && !options.blueprintId) {
+      throw new Error('templateId must be value string');
     }
     if (typeof options.onSuccess !== 'function' && typeof options.onComplete !== 'function') {
       throw new Error('onSuccess or onComplete callback must be function');
@@ -110,9 +113,14 @@ export default class Client {
   }
 
   handleMessage = (event) => {
+    // TODO: v3 - remove deprecated blueprintId
+    const templateId = this.clientOptions.templateId || this.clientOptions.blueprintId;
     if (
       event.origin !== this.baseUrl ||
-      event.data.blueprintId !== this.clientOptions.blueprintId
+      (
+        event.data.blueprintId !== templateId &&
+        event.data.templateId !== templateId
+      )
     ) {
       return;
     }
