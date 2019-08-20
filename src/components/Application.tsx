@@ -43,21 +43,17 @@ const PoweredBy = styled('div')`
   bottom: 8px;
   right: 8px
 
-  color: white;
-  font-family: 'Rubik', sans-serif;
-  font-size: 12px;
+  & svg {
+    height: 24px;
+  }
 
-  display: flex;
-  align-items: center;
+  & path {
+    fill: white;
+  }
 
   @media ${MEDIA_QUERIES.isMobile} {
     display: none;
   }
-`
-
-const PersonaLogo = styled('div')`
-  margin-left: 4px;
-  padding-top: 3px;
 `
 
 interface OpenGlobalStyleProps {
@@ -65,8 +61,6 @@ interface OpenGlobalStyleProps {
 }
 
 const OpenGlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
-
   // Don't allow scrolling when widget is open
   html body {
     overflow: hidden !important;
@@ -113,7 +107,7 @@ export default (props: ApplicationProps) => {
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}
 
-      <PoweredBy>Powered by <PersonaLogo><Logo/></PersonaLogo></PoweredBy>
+      <PoweredBy><Logo/></PoweredBy>
     </Overlay>
   );
 }
