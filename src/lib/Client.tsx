@@ -117,10 +117,7 @@ export default class Client {
     const templateId = this.clientOptions.templateId || this.clientOptions.blueprintId;
     if (
       event.origin !== this.baseUrl ||
-      (
-        event.data.blueprintId !== templateId &&
-        event.data.templateId !== templateId
-      )
+      event.data.templateId !== templateId
     ) {
       return;
     }

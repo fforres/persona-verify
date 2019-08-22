@@ -30,7 +30,7 @@ describe('Client', () => {
     it('renders', () => {
       expect(document.getElementsByTagName('iframe')).toHaveLength(1);
       expect(document.getElementsByTagName('iframe')[0].attributes.getNamedItem('src').value)
-        .toEqual('https://withpersona.com/widget?blueprint-id=test-template-id&iframe-origin=http%3A%2F%2Flocalhost&theme-id=test-theme-id');
+        .toEqual('https://withpersona.com/widget?template-id=test-template-id&iframe-origin=http%3A%2F%2Flocalhost&theme-id=test-theme-id');
     });
 
     it('handles onStart', async (done) => {
@@ -87,7 +87,7 @@ describe('Client', () => {
     it('renders', () => {
       expect(document.getElementsByTagName('iframe')).toHaveLength(1);
       expect(document.getElementsByTagName('iframe')[0].attributes.getNamedItem('src').value)
-        .toEqual('https://withpersona.com/widget?blueprint-id=test-template-id&iframe-origin=http%3A%2F%2Flocalhost&theme-id=test-theme-id');
+        .toEqual('https://withpersona.com/widget?template-id=test-template-id&iframe-origin=http%3A%2F%2Flocalhost&theme-id=test-theme-id');
     });
   });
 });

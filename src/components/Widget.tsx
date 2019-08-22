@@ -66,8 +66,7 @@ export interface WidgetProps {
 export default (props: WidgetProps) => {
   const prefill = props.prefill || {} as PrefillAttributes;
   const queryParams = qs.stringify({
-    // TODO: v3 - remove deprecated blueprintId
-    'blueprint-id': props.templateId,
+    'template-id': props.templateId,
     environment: props.environment,
     'iframe-origin': window.location.origin,
     'inquiry-id': props.inquiryId,

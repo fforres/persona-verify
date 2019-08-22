@@ -28,3 +28,9 @@ Make sure you are on the latest commit on master.
 yarn deploy
 ```
 
+Also version the NPM module
+
+```
+yarn publish
+```
+
