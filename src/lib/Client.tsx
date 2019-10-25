@@ -135,19 +135,27 @@ export default class Client {
         break;
 
       case 'success':
+        // TODO: v3 - delete this callback
         this.clientOptions.onSuccess &&
           this.clientOptions.onSuccess(event.data.metadata);
         break;
 
       case 'complete':
+        this.isOpen = false;
         this.clientOptions.onComplete &&
           this.clientOptions.onComplete(event.data.metadata);
+        // TODO: v3 - remove exit call when completing
+        this.clientOptions.onExit &&
+          this.clientOptions.onExit(event.data.error, event.data.metadata);
         break;
 
       case 'exit':
         this.isOpen = false;
-        this.clientOptions.onExit &&
-          this.clientOptions.onExit(event.data.error, {});
+        // TODO: v3 - after exit call is removed from complete screen, this can be cleaned up
+        if (!event.data.metadata || !event.data.metadata.inquiryId) {
+          this.clientOptions.onExit &&
+            this.clientOptions.onExit(event.data.error, {});
+        }
         break;
 
       default:
