@@ -93,7 +93,7 @@ export default (props: ApplicationProps) => {
       }
 
       <Widget
-        templateId={props.clientOptions.templateId || props.clientOptions.blueprintId}
+        templateId={props.clientOptions.templateId}
         themeId={props.clientOptions.themeId}
         environment={props.clientOptions.environment}
         inquiryId={props.clientOptions.inquiryId}
@@ -101,7 +101,7 @@ export default (props: ApplicationProps) => {
         personaBaseUrl={props.personaBaseUrl}
         prefill={props.clientOptions.prefill}
         refIframe={props.refIframe}
-        sessionToken={props.clientOptions.sessionToken}
+        accessToken={props.clientOptions.accessToken}
         subject={props.clientOptions.subject}
         referenceId={props.clientOptions.referenceId}
       />

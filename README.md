@@ -31,7 +31,7 @@ const client: Client = new Persona.Client({
   templateId: 'persona-production_e1de83bf-e29f-48bb-9dae-568479b9edda',
   onLoad: () => client.open(),
   onStart: (inquiryId: string) => console.log(inquiryId),
-  onSuccess: () => console.log('onSuccess'),
+  onComplete: (inquiryId: string, scopes: { [key: string]: string }) => console.log('onComplete'),
 });
 ```
 

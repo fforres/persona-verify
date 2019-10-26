@@ -58,7 +58,7 @@ export interface WidgetProps {
   personaBaseUrl: string;
   prefill?: PrefillAttributes;
   refIframe: React.RefObject<HTMLIFrameElement>;
-  sessionToken?: string;
+  accessToken?: string;
   subject?: string;
   referenceId?: string;
 }
@@ -71,7 +71,7 @@ export default (props: WidgetProps) => {
     'iframe-origin': window.location.origin,
     'inquiry-id': props.inquiryId,
     language: props.language,
-    'session-token': props.sessionToken,
+    'session-token': props.accessToken,
     subject: props.subject,
     'reference-id': props.referenceId,
     'theme-id': props.themeId,

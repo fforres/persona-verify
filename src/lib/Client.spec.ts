@@ -16,7 +16,6 @@ describe('Client', () => {
         templateId: 'test-template-id',
         themeId: 'test-theme-id',
         onStart: mockHandleStart,
-        onSuccess: mockHandleSuccess,
         onComplete: mockHandleComplete,
       });
     });
@@ -50,8 +49,8 @@ describe('Client', () => {
     });
 
     it('handles onComplete', async (done) => {
-      mockHandleComplete.mockImplementation((metadata) => {
-        expect(metadata).toEqual({ inquiryId: 'test-inquiry-id' });
+      mockHandleComplete.mockImplementation((inquiryId, _scopes) => {
+        expect(inquiryId).toEqual('test-inquiry-id');
         done();
       });
 
@@ -63,31 +62,6 @@ describe('Client', () => {
           metadata: { inquiryId: 'test-inquiry-id', },
         },
       });
-    });
-  });
-
-  // TODO: v3 - remove deprecated blueprintId
-  describe('with blueprint id', () => {
-    beforeAll(() => {
-      new Client({
-        blueprintId: 'test-template-id',
-        themeId: 'test-theme-id',
-        onStart: mockHandleStart,
-        onSuccess: mockHandleSuccess,
-        onComplete: mockHandleComplete,
-      });
-    });
-
-    afterAll(() => {
-      for (const iframe of document.getElementsByTagName('iframe')) {
-        iframe.parentElement.removeChild(iframe);
-      }
-    });
-
-    it('renders', () => {
-      expect(document.getElementsByTagName('iframe')).toHaveLength(1);
-      expect(document.getElementsByTagName('iframe')[0].attributes.getNamedItem('src').value)
-        .toEqual('https://withpersona.com/widget?template-id=test-template-id&iframe-origin=http%3A%2F%2Flocalhost&theme-id=test-theme-id');
     });
   });
 });

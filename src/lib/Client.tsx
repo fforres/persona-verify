@@ -5,8 +5,6 @@ import Application from 'components/Application';
 import { PrefillAttributes, ClientError } from 'lib/interfaces';
 
 export interface ClientOptions {
-  // TODO: v3 - remove deprecated blueprintId
-  blueprintId?: string;
   templateId?: string;
   themeId?: string;
   environment?: string;
@@ -15,15 +13,14 @@ export interface ClientOptions {
   referenceId?: string;
 
   inquiryId?: string;
-  sessionToken?: string;
+  accessToken?: string;
 
   language?: string;
   prefill?: PrefillAttributes;
 
   onLoad?: (error: ClientError) => void;
   onStart?: (inquiryId: string) => void;
-  onSuccess?: (metadata: {}) => void;
-  onComplete?: (metadata: {}) => void;
+  onComplete?: (inquiryId: string, scopes: {}) => void;
   onExit?: (error: ClientError | undefined, metadata: {}) => void;
   onEvent?: (name: string, metadata: {}) => void;
 }
@@ -43,12 +40,11 @@ export default class Client {
     this.refIframe = React.createRef();
 
     // User error handling
-    // TODO: v3 - remove deprecated blueprintId
-    if (!options.templateId && !options.blueprintId) {
+    if (!options.templateId) {
       throw new Error('templateId must be value string');
     }
-    if (typeof options.onSuccess !== 'function' && typeof options.onComplete !== 'function') {
-      throw new Error('onSuccess or onComplete callback must be function');
+    if (typeof options.onComplete !== 'function') {
+      throw new Error('onComplete callback must be function');
     }
 
     // Setup message handling
@@ -113,8 +109,7 @@ export default class Client {
   }
 
   handleMessage = (event) => {
-    // TODO: v3 - remove deprecated blueprintId
-    const templateId = this.clientOptions.templateId || this.clientOptions.blueprintId;
+    const templateId = this.clientOptions.templateId;
     if (
       event.origin !== this.baseUrl ||
       event.data.templateId !== templateId
@@ -134,28 +129,19 @@ export default class Client {
           this.clientOptions.onStart(event.data.metadata.inquiryId);
         break;
 
-      case 'success':
-        // TODO: v3 - delete this callback
-        this.clientOptions.onSuccess &&
-          this.clientOptions.onSuccess(event.data.metadata);
-        break;
-
       case 'complete':
         this.isOpen = false;
         this.clientOptions.onComplete &&
-          this.clientOptions.onComplete(event.data.metadata);
-        // TODO: v3 - remove exit call when completing
-        this.clientOptions.onExit &&
-          this.clientOptions.onExit(event.data.error, event.data.metadata);
+          this.clientOptions.onComplete(
+            event.data.metadata.inquiryId,
+            event.data.metadata.scopes,
+          );
         break;
 
       case 'exit':
         this.isOpen = false;
-        // TODO: v3 - after exit call is removed from complete screen, this can be cleaned up
-        if (!event.data.metadata || !event.data.metadata.inquiryId) {
-          this.clientOptions.onExit &&
-            this.clientOptions.onExit(event.data.error, {});
-        }
+        this.clientOptions.onExit &&
+          this.clientOptions.onExit(event.data.error, {});
         break;
 
       default:

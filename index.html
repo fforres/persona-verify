@@ -22,16 +22,16 @@
     host: 'development',
     onLoad: function() { console.log("onLoad") },
     onStart: function(inquiryId) { console.log("Started lending: " + inquiryId) },
-    onSuccess: function() { console.log("onSuccess") },
+    onComplete: function(inquiryId, scopes) { console.log(inquiryId, scopes) },
     onEvent: function(name, metadata) { console.log(name, metadata) },
   })
   </script>
   <script>
   const clientVapes = new Persona.Client({
-    blueprintId: 'blu_FWCe9QpnZxE1FRaAJ3ubqDkG',
+    templateId: 'blu_FWCe9QpnZxE1FRaAJ3ubqDkG',
     host: 'development',
     onLoad: function() { console.log("onLoad") },
-    onComplete: function(metadata) { console.log("onComplete: " + JSON.stringify(metadata)) },
+    onComplete: function(inquiryId, scopes) { console.log(inquiryId, scopes) },
     onEvent: function(name, metadata) { console.log(name, metadata) },
   })
   </script>
