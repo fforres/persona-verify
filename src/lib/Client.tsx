@@ -116,6 +116,9 @@ export default class Client {
       return;
     }
 
+    this.clientOptions.onEvent &&
+      this.clientOptions.onEvent(event.data.name, event.data.metadata);
+
     switch (event.data.name) {
       case 'load':
         this.isLoading = false;
@@ -141,11 +144,6 @@ export default class Client {
         this.isOpen = false;
         this.clientOptions.onExit &&
           this.clientOptions.onExit(event.data.error, {});
-        break;
-
-      default:
-        this.clientOptions.onEvent &&
-          this.clientOptions.onEvent(event.data.name, event.data.metadata);
         break;
     }
 
