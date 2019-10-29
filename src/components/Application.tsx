@@ -102,7 +102,6 @@ export default (props: ApplicationProps) => {
         prefill={props.clientOptions.prefill}
         refIframe={props.refIframe}
         accessToken={props.clientOptions.accessToken}
-        subject={props.clientOptions.subject}
         referenceId={props.clientOptions.referenceId}
       />
       {props.isOpen && <OpenGlobalStyle containerId={props.containerId} />}

@@ -9,7 +9,6 @@ export interface ClientOptions {
   themeId?: string;
   environment?: string;
   host?: string;
-  subject?: string;
   referenceId?: string;
 
   inquiryId?: string;
@@ -18,7 +17,7 @@ export interface ClientOptions {
   language?: string;
   prefill?: PrefillAttributes;
 
-  onLoad?: (error: ClientError) => void;
+  onLoad?: (error: ClientError | undefined) => void;
   onStart?: (inquiryId: string) => void;
   onComplete?: (inquiryId: string, scopes: {}) => void;
   onExit?: (error: ClientError | undefined, metadata: {}) => void;
