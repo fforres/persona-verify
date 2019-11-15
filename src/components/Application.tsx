@@ -1,12 +1,13 @@
 import * as React from 'react';
-import styled, { keyframes, createGlobalStyle } from 'styled-components';
+
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 import CenteredFrame from 'components/CenteredFrame';
+import { ClientOptions } from 'lib/Client';
 import LoadingSpinner from 'components/LoadingSpinner';
 import Logo from 'images/logo.svg';
-import Widget from 'components/Widget';
 import { MEDIA_QUERIES } from 'lib/styles';
-import { ClientOptions } from 'lib/Client';
+import Widget from 'components/Widget';
 
 const OVERLAY_OPACITY = 0.7;
 
@@ -41,10 +42,11 @@ const Overlay = styled('div')`
 const PoweredBy = styled('div')`
   position: absolute;
   bottom: 8px;
-  right: 8px
+  left: 50%;
+  transform: translateX(-50%);
 
   & svg {
-    height: 24px;
+    height: 51px;
   }
 
   & path {
