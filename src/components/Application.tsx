@@ -46,7 +46,7 @@ const PoweredBy = styled('div')`
   transform: translateX(-50%);
 
   & svg {
-    height: 40px;
+    height: 51px;
   }
 
   & path {
