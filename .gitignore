@@ -11,3 +11,6 @@ yarn-error.log*
 # Ignore MacOS generated files
 .DS_Store
 
+# Ignore deploy files
+bitbucket-pipelines.yml
+DEPLOY.md
