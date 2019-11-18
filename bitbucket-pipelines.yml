@@ -1,0 +1,105 @@
+pipelines:
+  default:
+    - step:
+        name: Jest
+        max-time: 5 # minutes
+        image:
+          name: gcr.io/persona-web/verify:1.0.0
+          username: _json_key
+          password: "$GCLOUD_CONTAINER_REGISTRY_JSON_KEY"
+        script:
+          # Install dependencies
+          - yarn install
+          # Run tests
+          - yarn jest
+        caches:
+          - yarn
+  branch:
+    master:
+      - step:
+          name: Master
+          max-time: 5 # minutes
+          image:
+            name: gcr.io/persona-web/verify:1.0.0
+            username: _json_key
+            password: "$GCLOUD_CONTAINER_REGISTRY_JSON_KEY"
+          script:
+            # Install dependencies
+            - yarn install
+            # Run tests
+            - yarn jest
+            # Push to Github branch
+            - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+            - git fetch
+            - git rebase origin/github
+            - git push -f origin master:github
+          caches:
+            - yarn
+    github:
+      - step:
+          name: Push to Github
+          max-time: 5 # minutes
+          image:
+            name: gcr.io/persona-web/verify:1.0.0
+            username: _json_key
+            password: "$GCLOUD_CONTAINER_REGISTRY_JSON_KEY"
+          script:
+            # Push to Github
+            - git remote add github git@github.com:persona-id/persona-verify.git
+            - git push -f github github:master
+          after-script:
+            - >
+              if [ $BITBUCKET_EXIT_CODE = 1 ]; then
+                curl -X POST \
+                  https://events.pagerduty.com/generic/2010-04-15/create_event.json \
+                  -d '{
+                    "service_key": "7606f359fc684c8fa43ded46b435db70",
+                    "event_type": "trigger",
+                    "description": "[persona-verify] Mirroring to Github failed: https://bitbucket.org/'$BITBUCKET_REPO_FULL_NAME'/addon/pipelines/home#!/results/'$BITBUCKET_BUILD_NUMBER'/"
+                }'
+              fi
+    release/v*.*.*:
+      - step:
+          name: Deploy version
+          max-time: 10 # minutes
+          image:
+            name: gcr.io/persona-web/verify:1.0.0
+            username: _json_key
+            password: '$GCLOUD_CONTAINER_REGISTRY_JSON_KEY'
+          script:
+            # Ensure version matches branch name
+            - export PERSONA_VERSION=`npm show persona version`
+            - >
+              if [ $BITBUCKET_BRANCH != "release/v$PERSONA_VERSION" ]; then
+                echo "Branch name $BITBUCKET_BRANCH not equal to $PERSONA_VERSION."
+                exit 1
+              fi
+            # Authenticate for GCloud
+            - echo $GCLOUD_API_JSON_KEY > secrets/google-cloud-keyfile.json
+            - gcloud --quiet auth activate-service-account --key-file secrets/google-cloud-keyfile.json
+            - gcloud --quiet config set project persona-web
+            # Install dependencies
+            - yarn install
+            # Build package
+            - webpack
+            # Deploy persona.js to CDN
+            - gsutil cp dist/persona.js gs::cdn.withpersona.com/assets/$PERSONA_VERSION/persona.js
+            # TODO @charles: Deploy persona.js to NPM
+            # - npm publish
+          after-script:
+            - >
+              if [ $BITBUCKET_EXIT_CODE = 1 ]; then
+                curl -X POST \
+                  https://events.pagerduty.com/generic/2010-04-15/create_event.json \
+                  -d '{
+                    "service_key": "7606f359fc684c8fa43ded46b435db70",
+                    "event_type": "trigger",
+                    "description": "[persona-verify] Deploy failed: https://bitbucket.org/'$BITBUCKET_REPO_FULL_NAME'/addon/pipelines/home#!/results/'$BITBUCKET_BUILD_NUMBER'/"
+                }'
+              fi
+          caches:
+            - yarn
+
+definitions:
+  caches:
+    yarn: node_modules

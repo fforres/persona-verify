@@ -44,4 +44,3 @@ Please see [Contributing](CONTRIBUTING.md) for guidelines and instructions for l
 [MIT](LICENSE)
 
 [0]: https://documentation.withpersona.com
-

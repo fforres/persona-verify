@@ -7,9 +7,6 @@
   "author": "Charles Yeh <charles@withpersona.com>",
   "license": "MIT",
   "sideEffects": false,
-  "scripts": {
-    "deploy": "yarn jest && webpack && gsutil cp dist/persona.js gs://cdn.withpersona.com/assets/v2/persona.js"
-  },
   "dependencies": {
     "core-js": "^3.0.0",
     "qs": "^6.7.0",
