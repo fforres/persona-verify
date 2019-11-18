@@ -14,7 +14,7 @@ pipelines:
           - yarn jest
         caches:
           - yarn
-  branch:
+  branches:
     master:
       - step:
           name: Master
@@ -103,3 +103,4 @@ pipelines:
 definitions:
   caches:
     yarn: node_modules
+
